@@ -1,0 +1,325 @@
+/* ------------------------------------- */
+/* 1. التنسيقات الأساسية (Base Styles) */
+/* ------------------------------------- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8; /* خلفية بيضاء خفيفة */
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    overflow-x: hidden;
+}
+
+/* ------------------------------------- */
+/* 2. تصميم رأس الصفحة (Header) والقائمة الملاحية (Navigation) */
+/* ------------------------------------- */
+header {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 40px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 0 15px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #007bff; /* لون أزرق مميز */
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-input-fancy {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 180px;
+    text-align: right;
+    transition: border-color 0.3s;
+}
+
+.search-input-fancy:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.icon {
+    font-size: 1.3em;
+    cursor: pointer;
+    color: #333;
+}
+
+/* ------------------------------------- */
+/* 3. تصميم قسم البطل (Hero Section) - الواجهة */
+/* ------------------------------------- */
+.hero-section {
+    /* تم استخدام اسم صورة افتراضي جديد */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/unnamed.jpg'); 
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 100px 50px;
+    text-align: center;
+    height: 350px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section h2 {
+    font-size: 3.2em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 25px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+/* ------------------------------------- */
+/* 4. تنسيق بطاقات المنتجات في الصفحة الرئيسية */
+/* ------------------------------------- */
+#products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px 20px; 
+    gap: 30px; 
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px; 
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: right;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.product-card p {
+    color: #777;
+    font-size: 0.95em;
+    min-height: 45px; 
+}
+
+.price {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.4em;
+    display: block;
+    margin-top: 15px;
+}
+
+/* ------------------------------------- */
+/* تنسيق زر عرض الأصناف (الآن كـ رابط) */
+/* ------------------------------------- */
+.view-variants-btn {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none; /* إزالة خط الرابط */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    text-align: center; /* توسيط النص داخل الزر */
+    transition: background-color 0.3s;
+}
+
+.view-variants-btn:hover {
+    background-color: #0056b3;
+}
+
+/* ------------------------------------- */
+/* 5. تنسيق صفحة تفاصيل المنتج (product-details.html) */
+/* ------------------------------------- */
+#details-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: right;
+}
+
+.product-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.product-header h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.product-header p {
+    font-size: 1.1em;
+    color: #777;
+}
+
+.variants-grid {
+    display: grid;
+    /* عرض عمودين على الأقل (350px) وعندما تكون الشاشة كبيرة تزيد الأعمدة */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.variant-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.variant-img-large {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain; 
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+}
+
+.variant-info {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.variant-info h3 {
+    color: #007bff; 
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.variant-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sizes-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sizes-container p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.size-chip {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+/* تم تعديل لون المقاسات ليتناسب مع زر الشراء */
+.size-chip:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-to-cart-btn {
+    background-color: #4CAF50; /* لون أخضر جذاب */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #388E3C;
+}
+
+/* ------------------------------------- */
+/* 6. تنسيق الذيل (Footer) */
+/* ------------------------------------- */
+footer {
+    text-align: center;
+    padding: 1.5em 0;
+    background: #222;
+    color: #fff;
+    width: 100%;
+    margin-top: 50px;
+}
