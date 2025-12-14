@@ -331,69 +331,18 @@ footer {
 @media (max-width: 768px) {
     
     /* 1. رأس الصفحة والتنقل (Header & Nav) */
-    header {
-        padding: 10px 15px; /* تقليل الحشو على الجوانب */
-    }
+    /* ... (باقي التنسيقات هنا تبقى كما هي) ... */
 
-    .nav-bar {
-        /* جعل عناصر الشريط الرأسي تترتب عمودياً */
-        flex-direction: column; 
-        gap: 10px;
-    }
-
-    nav ul {
-        /* إخفاء القائمة الرئيسية لجعل رأس الصفحة أبسط (يمكن إظهارها في قائمة منسدلة لاحقاً) */
-        display: none; 
-    }
-
-    .header-icons {
-        width: 100%;
-        justify-content: space-around;
-        margin-top: 10px;
-    }
-
-    .search-input-fancy {
-        width: 100px; /* تصغير عرض شريط البحث */
-    }
-
-    /* 2. قسم البطل (Hero Section) */
+    /* 2. قسم البطل (Hero Section) -- تم التعديل هنا */
     .hero-section {
-        height: 250px; /* تقليل ارتفاعه */
-        padding: 50px 20px;
+        height: 200px; /* تقليل الارتفاع أكثر ليناسب شاشة الهاتف */
+        padding: 40px 20px;
+        /* إضافة هذا السطر: يضبط موضع الخلفية ليكون مركزياً دائماً */
+        background-position: center center; 
     }
 
     .hero-section h2 {
-        font-size: 2em; /* تصغير الخط الرئيسي */
+        font-size: 1.8em; /* تصغير الخط الرئيسي قليلاً أكثر */
     }
-
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
-
-    /* 3. بطاقات المنتجات (Product Cards) */
-    #products-container {
-        padding: 20px 10px;
-        gap: 20px;
-    }
-
-    .product-card {
-        width: 100%; /* جعل البطاقة تأخذ عرض الشاشة بالكامل */
-        max-width: 400px; /* تحديد عرض أقصى لتبدو جيدة على الأجهزة اللوحية */
-    }
-
-    /* 4. صفحة التفاصيل (product-details) */
-    .variants-grid {
-        /* جعل الشبكة تظهر بعمود واحد على الهواتف */
-        grid-template-columns: 1fr; 
-    }
-
-    .product-header h1 {
-        font-size: 2em;
-    }
-    
-    .variant-price {
-        font-size: 1.5em; /* تصغير سعر المنتج */
-    }
-
+    /* ... (باقي التنسيقات هنا تبقى كما هي) ... */
 }
