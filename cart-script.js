@@ -1,3 +1,49 @@
+// ----------------------------------------------------------------------
+// مصفوفة المنتجات (مُكررة لتشغيل الصفحة بشكل منفصل)
+// ----------------------------------------------------------------------
+const products = [
+    {
+        id: 1,
+        name: "حذاء الجري فائق السرعة",
+        price: 189.50,
+        description: "تصميم خفيف الوزن بأحدث تقنيات امتصاص الصدمات، مثالي للماراثون.",
+        imageUrl: "images/reb1 (1).jpeg", 
+        variants: [
+            { color: "أبيض/رمادي", sizes: ["40", "41", "42", "43"], variant_image: "images/rebok1.jpeg" },
+            { color: "أسود/أحمر", sizes: ["41", "42", "44"], variant_image: "images/rebok2.jpeg" },
+            { color: "أزرق فاتح", sizes: ["40", "43"], variant_image: "images/rebok3.jpeg" }
+        ]
+    },
+    {
+        id: 2,
+        name: "حذاء رياضي كلاسيكي V9",
+        price: 99.99,
+        description: "الحذاء الأيقوني المريح، أساسي لكل إطلالة يومية.",
+        imageUrl: "images/c270a.jpeg", 
+        variants: [
+            { color: "أبيض ناصع", sizes: ["38", "39", "40", "41", "42"], variant_image: "images/c270a.jpeg" },
+            { color: "أخضر زيتوني", sizes: ["39", "41", "43"], variant_image: "images/c270b.jpeg" },
+            { color: "أحمر زيتوني", sizes: ["39", "41", "43"], variant_image: "images/c270c.jpeg" },
+            { color: "رمادي داكن", sizes: ["39", "41", "43"], variant_image: "images/c270d.jpeg" }
+        ]
+    },
+    {
+        id: 3,
+        name: "حذاء التدريب القوي",
+        price: 145.00,
+        description: "ثبات ودعم ممتازين، مثالي لتمارين القوة وصالة الألعاب الرياضية.",
+        imageUrl: "images/reb1 (3).jpeg", 
+        
+        variants: [
+            { color: "أسود فاحم", sizes: ["40", "41", "42"], variant_image: "images/reb1 (3).jpeg" },
+            { color: "رمادي غامق", sizes: ["41", "42", "44"], variant_image: "images/reb1 (2).jpeg" }
+        ]
+    }
+];
+
+// ----------------------------------------------------------------------
+// *بدء منطق السلة الأصلي*
+// ----------------------------------------------------------------------
 const cartItemsContainer = document.getElementById('cart-items');
 const subtotalElement = document.getElementById('subtotal');
 const totalAmountElement = document.getElementById('total-amount');
@@ -5,28 +51,20 @@ const checkoutButton = document.getElementById('checkout-btn');
 
 let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
-// ----------------------------------------------------------------------
-// 1. حساب الإجمالي الكلي للسلة
-// ----------------------------------------------------------------------
 function calculateCartTotal() {
     let subtotal = 0;
     cart.forEach(item => {
         subtotal += item.price * item.quantity;
     });
     
-    // يمكنك إضافة الضرائب أو الشحن هنا لاحقاً
     const total = subtotal; 
     
     subtotalElement.textContent = `${subtotal.toFixed(2)} ر.س`;
     totalAmountElement.textContent = `${total.toFixed(2)} ر.س`;
     
-    // تفعيل زر الدفع إذا كانت السلة غير فارغة
     checkoutButton.disabled = cart.length === 0;
 }
 
-// ----------------------------------------------------------------------
-// 2. عرض محتويات السلة
-// ----------------------------------------------------------------------
 function renderCart() {
     cartItemsContainer.innerHTML = ''; 
 
@@ -40,7 +78,6 @@ function renderCart() {
         const cartItemDiv = document.createElement('div');
         cartItemDiv.className = 'cart-item';
         
-        // بناء عنصر السلة
         cartItemDiv.innerHTML = `
             <img src="${item.image}" alt="${item.name}">
             <div class="item-details">
@@ -58,14 +95,10 @@ function renderCart() {
         cartItemsContainer.appendChild(cartItemDiv);
     });
 
-    // ربط الأحداث بعد إنشاء العناصر
     attachCartEventListeners();
     calculateCartTotal();
 }
 
-// ----------------------------------------------------------------------
-// 3. ربط أزرار التحكم بالسلة
-// ----------------------------------------------------------------------
 function attachCartEventListeners() {
     document.querySelectorAll('.add-btn').forEach(button => {
         button.addEventListener('click', updateItemQuantity);
@@ -80,9 +113,6 @@ function attachCartEventListeners() {
     });
 }
 
-// ----------------------------------------------------------------------
-// 4. تحديث الكمية (زيادة / إنقاص)
-// ----------------------------------------------------------------------
 function updateItemQuantity(e) {
     const itemId = e.target.getAttribute('data-id');
     const action = e.target.classList.contains('add-btn') ? 'add' : 'remove';
@@ -96,35 +126,25 @@ function updateItemQuantity(e) {
             cart[itemIndex].quantity--;
         }
         
-        // حفظ التغيير وعرض السلة مرة أخرى
         localStorage.setItem('shoppingCart', JSON.stringify(cart));
         renderCart();
     }
 }
 
-// ----------------------------------------------------------------------
-// 5. حذف المنتج من السلة
-// ----------------------------------------------------------------------
 function deleteItem(e) {
     const itemId = e.target.getAttribute('data-id');
     
-    // ترشيح السلة: إبقاء العناصر التي لا تطابق الـ id المحذوف
     cart = cart.filter(item => item.id !== itemId);
     
-    // حفظ التغيير وعرض السلة مرة أخرى
     localStorage.setItem('shoppingCart', JSON.stringify(cart));
     renderCart();
 }
 
-// ----------------------------------------------------------------------
-// 6. ربط زر الدفع (سنقوم ببرمجة صفحة checkout.html لاحقاً)
-// ----------------------------------------------------------------------
 checkoutButton.addEventListener('click', () => {
     if (cart.length > 0) {
+        // سيتم ربطها بـ checkout.html في الخطوة التالية
         window.location.href = 'checkout.html';
     }
 });
 
-
-// عند تحميل الصفحة، ابدأ بعرض السلة
 renderCart();

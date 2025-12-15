@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: right;
-    overflow-x: hidden;
+    overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي */
 }
 
 /* ------------------------------------- */
@@ -79,7 +79,7 @@ nav ul li a:hover {
 /* 3. تصميم قسم البطل (Hero Section) - الواجهة */
 /* ------------------------------------- */
 .hero-section {
-    /* تم استخدام اسم صورة افتراضي جديد */
+    /* تأكد من وجود صورة unnamed.jpg داخل مجلد images/ */
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/unnamed.jpg'); 
     background-size: cover;
     background-position: center;
@@ -171,13 +171,11 @@ nav ul li a:hover {
     margin-top: 15px;
 }
 
-/* ------------------------------------- */
 /* تنسيق زر عرض الأصناف (الآن كـ رابط) */
-/* ------------------------------------- */
 .view-variants-btn {
     background-color: #007bff;
     color: white;
-    text-decoration: none; /* إزالة خط الرابط */
+    text-decoration: none;
     border: none;
     padding: 10px 15px;
     border-radius: 6px;
@@ -186,7 +184,7 @@ nav ul li a:hover {
     display: block;
     width: 100%;
     margin-top: 15px;
-    text-align: center; /* توسيط النص داخل الزر */
+    text-align: center;
     transition: background-color 0.3s;
 }
 
@@ -223,7 +221,6 @@ nav ul li a:hover {
 
 .variants-grid {
     display: grid;
-    /* عرض عمودين على الأقل (350px) وعندما تكون الشاشة كبيرة تزيد الأعمدة */
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
     gap: 40px;
     margin-top: 30px;
@@ -290,10 +287,19 @@ nav ul li a:hover {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-/* تم تعديل لون المقاسات ليتناسب مع زر الشراء */
+
 .size-chip:hover {
     background-color: #007bff;
     color: white;
+}
+
+/* تنسيق المقاس المختار */
+.size-chip.selected {
+    background-color: #007bff; 
+    color: white;
+    border: 2px solid #0056b3;
+    transform: scale(1.1); 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .add-to-cart-btn {
@@ -308,8 +314,20 @@ nav ul li a:hover {
     transition: background-color 0.3s;
 }
 
-.add-to-cart-btn:hover {
+.add-to-cart-btn:hover:not([disabled]) {
     background-color: #388E3C;
+}
+
+.add-to-cart-btn[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.selection-message {
+    color: green;
+    font-weight: bold;
+    font-size: 0.9em;
+    height: 20px;
 }
 
 /* ------------------------------------- */
@@ -323,8 +341,9 @@ footer {
     width: 100%;
     margin-top: 50px;
 }
+
 /* ------------------------------------- */
-/* 8. تنسيق صفحة سلة التسوق (Cart Page) */
+/* 7. تنسيق صفحة سلة التسوق (Cart Page) */
 /* ------------------------------------- */
 
 #cart-container {
@@ -471,7 +490,74 @@ footer {
     padding: 50px;
 }
 
-/* الاستجابة للأجهزة الصغيرة */
+/* ------------------------------------- */
+/* 8. الاستجابة للأجهزة الصغيرة (Media Queries) */
+/* ------------------------------------- */
+
+/* تنسيقات شاشات الهاتف والتابلت (أصغر من 768 بكسل) */
+@media (max-width: 768px) {
+    
+    /* رأس الصفحة والتنقل (Header & Nav) */
+    header {
+        padding: 10px 15px; 
+    }
+
+    .nav-bar {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    nav ul {
+        display: none; 
+    }
+
+    .header-icons {
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .search-input-fancy {
+        width: 100px; 
+    }
+
+    /* قسم البطل (Hero Section) */
+    .hero-section {
+        height: 200px; 
+        padding: 40px 20px;
+        background-position: center center; 
+    }
+
+    .hero-section h2 {
+        font-size: 1.8em;
+    }
+
+    /* بطاقات المنتجات (Product Cards) */
+    #products-container {
+        padding: 20px 10px;
+        gap: 20px;
+    }
+
+    .product-card {
+        width: 100%; 
+        max-width: 400px; 
+    }
+
+    /* صفحة التفاصيل (product-details) */
+    #details-container {
+        margin: 20px auto;
+    }
+    .variants-grid {
+        grid-template-columns: 1fr; /* عمود واحد */
+        gap: 20px;
+    }
+
+    .product-header h1 {
+        font-size: 2em;
+    }
+}
+
+/* تنسيقات إضافية لبطاقات السلة على الشاشات الصغيرة جداً (أصغر من 600 بكسل) */
 @media (max-width: 600px) {
     .cart-item {
         flex-wrap: wrap;

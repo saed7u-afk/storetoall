@@ -3,12 +3,10 @@ const products = [
     {
         id: 1,
         name: "حذاء الجري فائق السرعة",
-        price: 189.50, // هذا سعر الموديل الأساسي
+        price: 189.50, 
         description: "تصميم خفيف الوزن بأحدث تقنيات امتصاص الصدمات، مثالي للماراثون.",
-        // الموديل الأساسي يستخدم صورة واحدة هنا
         imageUrl: "images/reb1 (1).jpeg", 
         
-        // مصفوفة الأصناف (الـ Variants): الألوان والمقاسات المتوفرة
         variants: [
             { color: "أبيض/رمادي", sizes: ["40", "41", "42", "43"], variant_image: "images/rebok1.jpeg" },
             { color: "أسود/أحمر", sizes: ["41", "42", "44"], variant_image: "images/rebok2.jpeg" },
@@ -25,7 +23,6 @@ const products = [
         variants: [
             { color: "أبيض ناصع", sizes: ["38", "39", "40", "41", "42"], variant_image: "images/c270a.jpeg" },
             { color: "أخضر زيتوني", sizes: ["39", "41", "43"], variant_image: "images/c270b.jpeg" },
-            // تم تصحيح الأخطاء التركيبية هنا (تم وضع الفواصل وتجنب التكرار إذا كان اللون هو نفسه)
             { color: "أحمر زيتوني", sizes: ["39", "41", "43"], variant_image: "images/c270c.jpeg" }, 
             { color: "رمادي داكن", sizes: ["39", "41", "43"], variant_image: "images/c270d.jpeg" }
         ]
@@ -44,10 +41,6 @@ const products = [
     }
 ];
 
-// ----------------------------------------------------------------------
-// دالة العرض (renderProducts) - تم تعديل الزر ليصبح رابطاً
-// ----------------------------------------------------------------------
-
 const productsContainer = document.getElementById('products-container');
 const searchInput = document.getElementById('search-input');
 
@@ -58,7 +51,7 @@ function renderProducts(itemsToRender = products) {
         const card = document.createElement('div');
         card.className = 'product-card';
 
-        // الزر الآن ينقلك إلى صفحة التفاصيل مع تمرير الـ ID عبر الرابط (URL)
+        // الزر ينقلك إلى صفحة التفاصيل مع تمرير الـ ID
         card.innerHTML = `
             <img src="${product.imageUrl}" alt="${product.name}">
             <h3>${product.name}</h3>
@@ -71,13 +64,8 @@ function renderProducts(itemsToRender = products) {
         
         productsContainer.appendChild(card);
     });
-    
-    // لم نعد بحاجة لربط حدث النقر، لأننا نستخدم وسم <a>
 }
 
-// ----------------------------------------------------------------------
-// منطق البحث (Search Logic) - تم تبسيطه ليصبح في نهاية الملف
-// ----------------------------------------------------------------------
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     
@@ -89,5 +77,4 @@ searchInput.addEventListener('input', (e) => {
 });
 
 
-// التشغيل الأولي: عرض كل المنتجات عند تحميل الصفحة
 renderProducts();

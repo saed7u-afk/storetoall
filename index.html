@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الأحذية الرياضية</title>
+    <title>متجر الأحذية الرياضية | الرئيسية</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
     <header>
         <div class="nav-bar">
             <div class="logo">
-                <img src="images/logo.png" alt="شعار متجر أحذية" style="height: 40px;">
+                <a href="index.html"> 
+                    <img src="images/logo.png" alt="شعار متجر أحذية" style="height: 40px;">
+                </a>
             </div>
             
             <nav>
                 <ul>
-                    <li><a href="#">الأحدث</a></li>
+                    <li><a href="index.html">الرئيسية</a></li>
                     <li><a href="#">الرجال</a></li>
                     <li><a href="#">النساء</a></li>
                     <li><a href="#">تخفيضات</a></li>
@@ -24,21 +26,23 @@
             </nav>
 
             <div class="header-icons">
-                <input type="text" id="search-input" placeholder="بحث..." class="search-input-fancy">
+                <input type="text" id="search-input" placeholder="ابحث عن موديل..." class="search-input-fancy">
                 <span class="icon">❤️</span> 
-                <span class="icon">🛒</span> 
+                <a href="cart.html" class="icon">🛒</a> 
             </div>
         </div>
     </header>
     
-    <section class="hero-section">
-        <h2>عروض مميزة على مجموعات الجري الجديدة!</h2>
-        <p>اكتشف تشكيلة الأحذية الجديدة للموسم الحالي، ضمان أفضل جودة.</p>
-        <button class="cta-button">تسوق الأحذية</button>
-    </section>
+    <main>
+        <section class="hero-section">
+            <h2>عروض مميزة على مجموعات الجري الجديدة!</h2>
+            <p>اكتشف تشكيلة الأحذية الجديدة للموسم الحالي، ضمان أفضل جودة.</p>
+            <button class="cta-button">تسوق الأحذية</button>
+        </section>
 
-    <main id="products-container">
-        </main>
+        <section id="products-container">
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2025 متجر العرض - تصميم احترافي</p>
