@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الدفع | متجر الأحذية</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html"> 
+                    <img src="images/logo.png" alt="شعار متجر أحذية" style="height: 40px;">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">الرجال</a></li>
+                    <li><a href="#">النساء</a></li>
+                    <li><a href="#">تخفيضات</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <span class="icon">❤️</span> 
+                <a href="cart.html" class="icon">🛒</a> 
+            </div>
+        </div>
+    </header>
+    
+    <main id="checkout-main">
+        <h1>إتمام عملية الدفع</h1>
+        
+        <div class="checkout-grid">
+            
+            <section id="shipping-details">
+                <h2>1. معلومات الشحن</h2>
+                <form id="checkout-form" method="POST" action="https://formspree.io/f/xpwveaqa"> 
+                    
+                    <label for="name">الاسم الكامل:</label>
+                    <input type="text" id="name" name="الاسم_الكامل" required>
+
+                    <label for="phone">رقم الهاتف للتواصل:</label>
+                    <input type="tel" id="phone" name="رقم_الهاتف" required>
+
+                    <label for="address">العنوان كاملاً:</label>
+                    <input type="text" id="address" name="العنوان_كاملاً" placeholder="الشارع، رقم المنزل، الحي" required>
+
+                    <label for="city">المدينة:</label>
+                    <input type="text" id="city" name="المدينة" required>
+
+                    <label for="zip">الرمز البريدي:</label>
+                    <input type="text" id="zip" name="الرمز_البريدي" required>
+
+                    <h2>2. طريقة الدفع</h2>
+                    <div class="payment-options">
+                        <label>
+                            <input type="radio" name="طريقة_الدفع" value="بطاقة ائتمانية" required>
+                            بطاقة ائتمانية (Visa / MasterCard)
+                        </label>
+                        <label>
+                            <input type="radio" name="طريقة_الدفع" value="الدفع عند الاستلام" required>
+                            الدفع عند الاستلام
+                        </label>
+                    </div>
+                    
+                    <input type="hidden" id="cart-data-input" name="ملخص_الطلبات">
+                    
+                    <button type="submit" id="place-order-btn" class="cta-button">تأكيد الطلب والدفع</button>
+                </form>
+            </section>
+
+            <section id="order-summary">
+                <h2>ملخص الطلب</h2>
+                <div id="summary-items">
+                    </div>
+                
+                <div class="summary-line">
+                    <span>الإجمالي الفرعي:</span>
+                    <span id="summary-subtotal">0.00 ر.س</span>
+                </div>
+                <div class="summary-line">
+                    <span>تكلفة الشحن:</span>
+                    <span id="shipping-cost">25.00 ر.س</span>
+                </div>
+                <hr>
+                <div class="summary-line total">
+                    <span>الإجمالي النهائي:</span>
+                    <span id="final-total">0.00 ر.س</span>
+                </div>
+
+                <p id="order-message" style="color: red;"></p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 متجر العرض - تصميم احترافي</p>
+    </footer>
+
+    <script src="checkout-script.js"></script> 
+</body>
+</html>
