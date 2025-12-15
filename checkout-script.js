@@ -7,7 +7,20 @@ const finalTotalElement = document.getElementById('final-total');
 const placeOrderButton = document.getElementById('place-order-btn');
 const checkoutForm = document.getElementById('checkout-form');
 const orderMessage = document.getElementById('order-message');
-const cartDataInput = document.getElementById('cart-data-input'); // الحقل المخفي
+const cartDataInput = document.getElementById('cart-data-input'); 
+
+// تعريف العناصر الخاصة بالدفع والبطاقة
+const visaRadio = document.getElementById('radio-visa');
+const cashRadio = document.getElementById('radio-cash');
+const cardDetailsDiv = document.getElementById('card-details');
+const expiryInput = document.getElementById('expiry'); // مدخل تاريخ الانتهاء
+
+const cardInputs = [
+    document.getElementById('card-number'),
+    document.getElementById('card-name'),
+    expiryInput, // تم إضافته ليعمل التنسيق عليه
+    document.getElementById('cvv')
+];
 
 let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
@@ -52,14 +65,54 @@ function renderOrderSummary() {
 }
 
 // ----------------------------------------------------------------------
-// 2. منطق تأكيد الطلب والدفع (المُعدل لـ Formspree)
+// 2. منطق إظهار وإخفاء حقول البطاقة (حل مشكلة الفيزا)
 // ----------------------------------------------------------------------
 
-// ربط هذا الحدث على "submit" للنموذج، وليس على "click" للزر
+function toggleCardFields() {
+    const isVisaSelected = visaRadio.checked;
+
+    if (isVisaSelected) {
+        cardDetailsDiv.style.display = 'block';
+        cardInputs.forEach(input => input.setAttribute('required', 'required'));
+    } else {
+        cardDetailsDiv.style.display = 'none';
+        cardInputs.forEach(input => input.removeAttribute('required'));
+    }
+}
+
+// ربط وظيفة التبديل بأزرار الراديو
+if (visaRadio && cashRadio) {
+    visaRadio.addEventListener('change', toggleCardFields);
+    cashRadio.addEventListener('change', toggleCardFields);
+}
+toggleCardFields();
+
+
+// ----------------------------------------------------------------------
+// 3. تنسيق مدخل تاريخ الانتهاء (MM/YY) - الكود الجديد
+// ----------------------------------------------------------------------
+
+if (expiryInput) {
+    expiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // إزالة أي شيء ليس رقمًا
+
+        // إذا كان طول المدخل 3 أرقام أو أكثر، أضف الشرطة المائلة بعد أول رقمين
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4); 
+        }
+
+        e.target.value = value;
+    });
+}
+
+
+// ----------------------------------------------------------------------
+// 4. منطق تأكيد الطلب والدفع (إرسال Formspree)
+// ----------------------------------------------------------------------
+
 checkoutForm.addEventListener('submit', handlePlaceOrder);
 
 function handlePlaceOrder(e) {
-    // منع الإرسال التلقائي للتحكم في عملية التحقق والإفراغ
     e.preventDefault(); 
 
     if (cart.length === 0) {
@@ -67,27 +120,25 @@ function handlePlaceOrder(e) {
         return;
     }
 
-    // 1. التحقق من صحة جميع المدخلات في النموذج
+    // التحقق من صحة جميع المدخلات
     if (!checkoutForm.checkValidity()) {
         orderMessage.textContent = 'الرجاء ملء جميع الحقول المطلوبة بشكل صحيح.';
         checkoutForm.reportValidity(); 
         return;
     }
 
-    // 2. تجميع محتويات السلة في نص واحد للحقل المخفي
+    // تجميع محتويات السلة في نص واحد للحقل المخفي
     let cartSummaryText = 'تفاصيل الطلب: ';
     cart.forEach((item, index) => {
         cartSummaryText += `(${index + 1}) - ${item.name} | مقاس: ${item.size} | كمية: ${item.quantity} | الإجمالي: ${(item.price * item.quantity).toFixed(2)} ر.س; `;
     });
     
-    // إضافة الإجمالي النهائي
     const finalTotalValue = (parseFloat(summarySubtotalElement.textContent) + SHIPPING_COST).toFixed(2);
     cartSummaryText += ` | الإجمالي النهائي شامل الشحن: ${finalTotalValue} ر.س.`;
     
-    // 3. وضع النص في الحقل المخفي
     cartDataInput.value = cartSummaryText;
 
-    // 4. إرسال النموذج إلى Formspree باستخدام Fetch API
+    // إرسال النموذج إلى Formspree باستخدام Fetch API
     fetch(checkoutForm.action, {
         method: checkoutForm.method,
         body: new FormData(checkoutForm),
@@ -97,7 +148,7 @@ function handlePlaceOrder(e) {
     })
     .then(response => {
         if (response.ok) {
-            // 5. إفراغ السلة وعرض رسالة النجاح بعد نجاح الإرسال
+            // إفراغ السلة وعرض رسالة النجاح بعد نجاح الإرسال
             localStorage.removeItem('shoppingCart');
             cart = [];
             
@@ -111,10 +162,11 @@ function handlePlaceOrder(e) {
             `;
             
             document.getElementById('place-order-btn').disabled = true;
-            renderOrderSummary(); // لتحديث عرض السلة الفارغة
-            checkoutForm.reset(); // مسح حقول النموذج
+            renderOrderSummary(); 
+            checkoutForm.reset(); 
 
         } else {
+            // معالجة أخطاء Formspree
             response.json().then(data => {
                 if (Object.hasOwn(data, 'errors')) {
                     orderMessage.textContent = data["errors"].map(error => error["message"]).join(", ");
@@ -128,10 +180,6 @@ function handlePlaceOrder(e) {
         orderMessage.textContent = "حدث خطأ في الاتصال بالشبكة. الرجاء المحاولة لاحقاً.";
     });
 }
-
-// ----------------------------------------------------------------------
-// ربط الأحداث (لا تغيير هنا)
-// ----------------------------------------------------------------------
 
 // تشغيل عرض الملخص عند تحميل الصفحة
 renderOrderSummary();

@@ -57,15 +57,34 @@
                     <h2>2. طريقة الدفع</h2>
                     <div class="payment-options">
                         <label>
-                            <input type="radio" name="طريقة_الدفع" value="بطاقة ائتمانية" required>
+                            <input type="radio" name="طريقة_الدفع" value="بطاقة ائتمانية" id="radio-visa" required>
                             بطاقة ائتمانية (Visa / MasterCard)
                         </label>
                         <label>
-                            <input type="radio" name="طريقة_الدفع" value="الدفع عند الاستلام" required>
+                            <input type="radio" name="طريقة_الدفع" value="الدفع عند الاستلام" id="radio-cash" required>
                             الدفع عند الاستلام
                         </label>
                     </div>
-                    
+
+                    <div id="card-details" style="display: none; border-top: 1px solid #ddd; padding-top: 15px; margin-top: 15px;">
+                        <label for="card-number">رقم البطاقة:</label>
+                        <input type="text" id="card-number" name="رقم_البطاقة" placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
+
+                        <label for="card-name">الاسم على البطاقة:</label>
+                        <input type="text" id="card-name" name="الاسم_على_البطاقة">
+
+                        <div style="display: flex; gap: 20px;">
+                            <div>
+                                <label for="expiry">تاريخ الانتهاء:</label>
+                                <input type="text" id="expiry" name="تاريخ_الانتهاء" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div>
+                                <label for="cvv">رمز CVV:</label>
+                                <input type="text" id="cvv" name="رمز_CVV" placeholder="XXX" maxlength="4" style="width: 100px;">
+                            </div>
+                        </div>
+                    </div>
+
                     <input type="hidden" id="cart-data-input" name="ملخص_الطلبات">
                     
                     <button type="submit" id="place-order-btn" class="cta-button">تأكيد الطلب والدفع</button>
@@ -75,7 +94,7 @@
             <section id="order-summary">
                 <h2>ملخص الطلب</h2>
                 <div id="summary-items">
-                    </div>
+                </div>
                 
                 <div class="summary-line">
                     <span>الإجمالي الفرعي:</span>
