@@ -1,4 +1,4 @@
-const SHIPPING_COST = 25.00; 
+const SHIPPING_COST = 15.00; // **** تم التعديل إلى 15.00 دينار ****
 
 const summaryItemsContainer = document.getElementById('summary-items');
 const summarySubtotalElement = document.getElementById('summary-subtotal');
@@ -18,14 +18,14 @@ const expiryInput = document.getElementById('expiry'); // مدخل تاريخ ا
 const cardInputs = [
     document.getElementById('card-number'),
     document.getElementById('card-name'),
-    expiryInput, // تم إضافته ليعمل التنسيق عليه
+    expiryInput,
     document.getElementById('cvv')
 ];
 
 let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
 
 // ----------------------------------------------------------------------
-// 1. عرض الملخص النهائي وحساب الإجمالي (لا تغيير)
+// 1. عرض الملخص النهائي وحساب الإجمالي
 // ----------------------------------------------------------------------
 
 function renderOrderSummary() {
@@ -48,8 +48,7 @@ function renderOrderSummary() {
                 <div class="item-info">
                     <h4>${item.name}</h4>
                     <p>المقاس: ${item.size} | الكمية: ${item.quantity}</p>
-                    <span class="item-total-price">${itemTotal.toFixed(2)} ر.س</span>
-                </div>
+                    <span class="item-total-price">${itemTotal.toFixed(2)} د.أ</span> </div>
             </div>
         `;
     });
@@ -57,9 +56,9 @@ function renderOrderSummary() {
     const finalTotal = subtotal + SHIPPING_COST;
     
     // تحديث الأرقام
-    summarySubtotalElement.textContent = `${subtotal.toFixed(2)} ر.س`;
-    shippingCostElement.textContent = `${SHIPPING_COST.toFixed(2)} ر.س`;
-    finalTotalElement.textContent = `${finalTotal.toFixed(2)} ر.س`;
+    summarySubtotalElement.textContent = `${subtotal.toFixed(2)} د.أ`; // **** تم التعديل هنا ****
+    shippingCostElement.textContent = `${SHIPPING_COST.toFixed(2)} د.أ`; // **** تم التعديل هنا ****
+    finalTotalElement.textContent = `${finalTotal.toFixed(2)} د.أ`; // **** تم التعديل هنا ****
 
     placeOrderButton.disabled = false;
 }
@@ -89,7 +88,7 @@ toggleCardFields();
 
 
 // ----------------------------------------------------------------------
-// 3. تنسيق مدخل تاريخ الانتهاء (MM/YY) - الكود الجديد
+// 3. تنسيق مدخل تاريخ الانتهاء (MM/YY)
 // ----------------------------------------------------------------------
 
 if (expiryInput) {
@@ -130,11 +129,13 @@ function handlePlaceOrder(e) {
     // تجميع محتويات السلة في نص واحد للحقل المخفي
     let cartSummaryText = 'تفاصيل الطلب: ';
     cart.forEach((item, index) => {
-        cartSummaryText += `(${index + 1}) - ${item.name} | مقاس: ${item.size} | كمية: ${item.quantity} | الإجمالي: ${(item.price * item.quantity).toFixed(2)} ر.س; `;
+        // تم تغيير الرمز في التجميع أيضاً
+        cartSummaryText += `(${index + 1}) - ${item.name} | مقاس: ${item.size} | كمية: ${item.quantity} | الإجمالي: ${(item.price * item.quantity).toFixed(2)} د.أ; `;
     });
     
     const finalTotalValue = (parseFloat(summarySubtotalElement.textContent) + SHIPPING_COST).toFixed(2);
-    cartSummaryText += ` | الإجمالي النهائي شامل الشحن: ${finalTotalValue} ر.س.`;
+    // تم تغيير الرمز هنا أيضاً
+    cartSummaryText += ` | الإجمالي النهائي شامل الشحن: ${finalTotalValue} د.أ.`;
     
     cartDataInput.value = cartSummaryText;
 

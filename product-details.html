@@ -27,14 +27,46 @@
 
             <div class="header-icons">
                 <span class="icon">❤️</span> 
-                
                 <a href="cart.html" class="icon">🛒</a> 
             </div>
         </div>
     </header>
 
     <main id="details-container">
-        </main>
+        <section class="product-details-grid">
+            
+            <div class="product-image-area">
+                <img id="product-image" src="" alt="صورة المنتج">
+            </div>
+
+            <div class="product-info-area">
+                <h1 id="product-name">اسم المنتج</h1>
+                <p class="product-price">السعر: <span id="final-price">15.00 د.أ</span></p>
+                
+                <h4 class="section-title">الوصف:</h4>
+                <p id="product-description">وصف المنتج</p>
+                
+                <div class="options-group">
+                    <label for="color-selector">اللون:</label>
+                    <select id="color-selector" name="color"></select>
+                </div>
+                
+                <div class="options-group">
+                    <label for="size-selector">المقاس:</label>
+                    <select id="size-selector" name="size"></select>
+                </div>
+
+                <div class="options-group">
+                    <label for="quantity">الكمية:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+                </div>
+
+                <button id="add-to-cart-btn" class="cta-button">أضف إلى السلة</button>
+                
+                <p id="message-status"></p>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2025 متجر العرض - تصميم احترافي</p>

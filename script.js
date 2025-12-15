@@ -3,7 +3,7 @@ const products = [
     {
         id: 1,
         name: "حذاء الجري فائق السرعة",
-        price: 189.50, 
+        price: 15.00, // **** تم توحيد السعر لـ 15.00 د.أ ****
         description: "تصميم خفيف الوزن بأحدث تقنيات امتصاص الصدمات، مثالي للماراثون.",
         imageUrl: "images/reb1 (1).jpeg", 
         
@@ -16,7 +16,7 @@ const products = [
     {
         id: 2,
         name: "حذاء رياضي كلاسيكي V9",
-        price: 99.99,
+        price: 15.00, // **** تم توحيد السعر لـ 15.00 د.أ ****
         description: "الحذاء الأيقوني المريح، أساسي لكل إطلالة يومية.",
         imageUrl: "images/c270a.jpeg", 
         
@@ -30,7 +30,7 @@ const products = [
     {
         id: 3,
         name: "حذاء التدريب القوي",
-        price: 145.00,
+        price: 15.00, // **** تم توحيد السعر لـ 15.00 د.أ ****
         description: "ثبات ودعم ممتازين، مثالي لتمارين القوة وصالة الألعاب الرياضية.",
         imageUrl: "images/reb1 (3).jpeg", 
         
@@ -51,13 +51,11 @@ function renderProducts(itemsToRender = products) {
         const card = document.createElement('div');
         card.className = 'product-card';
 
-        // الزر ينقلك إلى صفحة التفاصيل مع تمرير الـ ID
         card.innerHTML = `
             <img src="${product.imageUrl}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.description}</p>
-            <span class="price">${product.price.toFixed(2)} ر.س</span>
-            <a href="product-details.html?id=${product.id}" class="view-variants-btn">
+            <span class="price">${product.price.toFixed(2)} د.أ</span> <a href="product-details.html?id=${product.id}" class="view-variants-btn">
                 عرض ${product.variants.length} ألوان ومقاسات
             </a>
         `;
