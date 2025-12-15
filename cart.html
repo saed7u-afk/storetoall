@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة التسوق | متجر الأحذية</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="شعار متجر أحذية" style="height: 40px;">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">الرجال</a></li>
+                    <li><a href="#">النساء</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="cart.html" class="icon">🛒</a> 
+            </div>
+        </div>
+    </header>
+    
+    <main id="cart-container">
+        <h1>🛒 سلة التسوق</h1>
+        
+        <div id="cart-items">
+            </div>
+
+        <div id="cart-summary">
+            <h2>ملخص الطلب</h2>
+            <div class="summary-line">
+                <span>الإجمالي الفرعي:</span>
+                <span id="subtotal">0.00 ر.س</span>
+            </div>
+            <div class="summary-line total">
+                <span>الإجمالي الكلي:</span>
+                <span id="total-amount">0.00 ر.س</span>
+            </div>
+            <button id="checkout-btn" disabled>المتابعة إلى الدفع</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 متجر العرض - تصميم احترافي</p>
+    </footer>
+
+    <script src="cart-script.js"></script> 
+</body>
+</html>
